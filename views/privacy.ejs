@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Drive PDF Watermarker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .card {
+            border-radius: 15px;
+            border: none;
+        }
+        body {
+            line-height: 1.6;
+        }
+        .back-link {
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        /* Mobile adjustment */
+        @media (max-width: 576px) {
+            .card { padding: 1.5rem !important; }
+            h1 { font-size: 1.75rem; }
+            h4 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <div class="container mt-4 mt-md-5 mb-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                
+                <div class="card shadow-sm p-4 p-md-5">
+                    <div class="mb-4">
+                        <a href="/" class="btn btn-sm btn-outline-secondary back-link">
+                            ← Back to App
+                        </a>
+                    </div>
+
+                    <h1 class="fw-bold text-dark">Privacy Policy</h1>
+                    <p class="text-muted small">Last Updated: <span id="currentDate"></span></p>
+                    <hr class="my-4">
+
+                    <section class="mb-4">
+                        <h4 class="text-primary">1. Data Access</h4>
+                        <p class="text-secondary">
+                            Our app requests access to your Google Drive strictly to read PDF files and save watermarked versions. 
+                            <strong>We do not store your files on our permanent servers.</strong> 
+                            The access is limited to the specific tasks you initiate.
+                        </p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4 class="text-primary">2. Temporary Processing</h4>
+                        <p class="text-secondary">
+                            During the watermarking process, files are downloaded to a secure, temporary directory. 
+                            These files are <strong>automatically deleted</strong> immediately after the watermarked 
+                            version is successfully uploaded back to your Google Drive.
+                        </p>
+                    </section>
+
+                    <section class="mb-4">
+                        <h4 class="text-primary">3. Authentication & Tokens</h4>
+                        <p class="text-secondary">
+                            We use <strong>Google OAuth 2.0</strong> for secure authentication. Your access tokens 
+                            are stored temporarily in an encrypted session to perform Drive actions on your behalf 
+                            and are never shared with third parties or stored in a database.
+                        </p>
+                    </section>
+
+                    <section class="mb-2">
+                        <h4 class="text-primary">4. Contact Us</h4>
+                        <p class="text-secondary">
+                            If you have any questions regarding your privacy, feel free to reach out through our 
+                            official support channels at IT Tech Square.
+                        </p>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto py-4 text-center border-top bg-white">
+        <div class="container">
+            <p class="text-muted mb-0 small">
+                &copy; <span id="year"></span> IT Tech Square. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year and date
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Setting a nice readable date for the "Last Updated" section
+        const options = { month: 'long', year: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>

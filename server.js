@@ -102,5 +102,15 @@ app.get('/logout', (req, res) => {
     });
 });
 
+// Privacy Policy Route
+app.get('/privacy', (req, res) => {
+    res.render('privacy');
+});
+
+// Terms of Service Route
+app.get('/terms', (req, res) => {
+    res.render('terms');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Frontend Proxy Server running on port ${PORT}`));

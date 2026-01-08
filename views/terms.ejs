@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Drive PDF Watermarker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .card {
+            border-radius: 15px;
+            border: none;
+        }
+        body {
+            line-height: 1.6;
+        }
+        .back-link {
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .tos-list li {
+            margin-bottom: 15px;
+            color: #495057;
+        }
+        /* Mobile adjustment */
+        @media (max-width: 576px) {
+            .card { padding: 1.5rem !important; }
+            h1 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <div class="container mt-4 mt-md-5 mb-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                
+                <div class="card shadow-sm p-4 p-md-5">
+                    <div class="mb-4">
+                        <a href="/" class="btn btn-sm btn-outline-secondary back-link">
+                            ← Back to App
+                        </a>
+                    </div>
+
+                    <h1 class="fw-bold text-dark">Terms of Service</h1>
+                    <p class="text-muted small">Effective Date: <span id="currentDate"></span></p>
+                    <hr class="my-4">
+
+                    <p class="lead text-secondary">By accessing and using this service, you agree to comply with the following terms:</p>
+
+                    <ul class="tos-list mt-4">
+                        <li>
+                            <h5 class="text-dark">Document Ownership</h5>
+                            <p>You represent and warrant that you own or have the necessary legal rights and permissions to modify and watermark the documents you process through this app.</p>
+                        </li>
+                        <li>
+                            <h5 class="text-dark">"As Is" Service</h5>
+                            <p>The service is provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis. IT Tech Square makes no warranties, expressed or implied, regarding the reliability or accuracy of the watermarking process.</p>
+                        </li>
+                        <li>
+                            <h5 class="text-dark">Limitation of Liability</h5>
+                            <p>We are not responsible for any accidental data loss, corruption of files, or unauthorized access occurring on your Google Drive. It is recommended to keep backups of your original files.</p>
+                        </li>
+                        <li>
+                            <h5 class="text-dark">Usage Limits</h5>
+                            <p>You agree not to use the service for any illegal purposes or to distribute malware. We reserve the right to terminate access for any user violating these terms.</p>
+                        </li>
+                    </ul>
+
+                    <div class="alert alert-info mt-4 small">
+                        <strong>Note:</strong> These terms may be updated periodically. Your continued use of the app constitutes acceptance of any changes.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto py-4 text-center border-top bg-white">
+        <div class="container">
+            <p class="text-muted mb-0 small">
+                &copy; <span id="year"></span> IT Tech Square. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Setting a nice readable date
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
