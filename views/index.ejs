@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drive PDF Watermarker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <% if (!user) { %>
+            <div class="text-center">
+                <h2 class="mb-4">Google Drive Watermarker</h2>
+                <a href="/auth/google" class="btn btn-primary btn-lg">Login with Google</a>
+            </div>
+        <% } else { %>
+            <div class="card shadow p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4>Hi, <%= user.displayName %></h4>
+                    <a href="/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+
+                <form id="wmForm">
+                    <input type="hidden" id="token" value="<%= user.token %>">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Google Drive Folder URL</label>
+                        <input type="text" id="folder" class="form-control" placeholder="Paste link here..." required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Upload Logo (PNG/JPG)</label>
+                        <input type="file" id="logo" class="form-control" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-dark w-100">Start Watermarking</button>
+                </form>
+
+                <div id="progressSection" class="mt-4" style="display:none;">
+                    <p class="mb-1 text-center">Progress: <span id="percent">0</span>%</p>
+                    <div class="progress">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+                    </div>
+                    <p id="statusMsg" class="text-muted text-center mt-2 small">Processing files...</p>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
+        const form = document.getElementById('wmForm');
+        if(form) {
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+
+                const formData = new FormData();
+                formData.append('folder', document.getElementById('folder').value);
+                formData.append('logo', document.getElementById('logo').files[0]);
+                formData.append('token', document.getElementById('token').value);
+
+                const res = await fetch('/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                if (data.task_id) {
+                    document.getElementById('progressSection').style.display = 'block';
+                    startPolling(data.task_id);
+                }
+            };
+        }
+
+        function startPolling(taskId) {
+            const interval = setInterval(async () => {
+                const res = await fetch(`/status/${taskId}`);
+                const data = await res.json();
+
+                const bar = document.getElementById('progressBar');
+                const percentText = document.getElementById('percent');
+
+                bar.style.width = data.progress + '%';
+                percentText.innerText = data.progress;
+
+                if (data.status === 'completed') {
+                    clearInterval(interval);
+                    document.getElementById('statusMsg').innerText = "All PDF's Watermarked Successfully!";
+                    document.getElementById('statusMsg').classList.replace('text-muted', 'text-success');
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
